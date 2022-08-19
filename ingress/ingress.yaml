@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  rules:
+  - host: "monitoring.lhr1.k8s.netinc.io"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: prometheus-operated
+            port:
+              number: 9090
+  tls:
+  - hosts:
+      - "monitoring.lhr1.k8s.netinc.io"
+    secretName: letsencrypt-prod

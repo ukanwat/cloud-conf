@@ -1,0 +1,1 @@
+helm upgrade loki grafana/loki -f values.yaml -n loki

@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: tls-cert
+spec:
+  dnsNames:
+    - hasura.netinc.io
+  issuerRef:
+    kind: Issuer
+    name: ca-issuer
+  secretName: tls-cert
+  usages:
+    - digital signature
+    - key encipherment
+  renewBefore: 0h55m0s
+  duration: 1h0m0s

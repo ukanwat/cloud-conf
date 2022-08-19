@@ -1,0 +1,10 @@
+apiVersion: apisix.apache.org/v2beta3
+kind: ApisixTls
+metadata:
+  name: netinc-tls
+spec:
+  hosts:
+    - hasura.netinc.io
+  secret:
+    name: tls-cert # the secret created by cert-manager
+    namespace: default # secret namespace

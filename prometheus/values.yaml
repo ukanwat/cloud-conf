@@ -1,0 +1,67 @@
+kube-state-metrics:
+  metricLabelsAllowlist:
+    - pods=[*]
+    - deployments=[app.kubernetes.io/name,app.kubernetes.io/component,app.kubernetes.io/instance]
+prometheus:
+  prometheusSpec:
+    additionalScrapeConfigs:
+    - job_name: opencost
+      honor_labels: true
+      scrape_interval: 1m
+      scrape_timeout: 10s
+      metrics_path: /metrics
+      scheme: http
+      static_configs:
+      - targets:
+        - cost-model.cost-model:9003
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    remoteWrite:
+    - url: "https://vminsert.corp.coplane.co/insert/0/prometheus"
+      basicAuth:
+          username:
+            name: vmpromsecret
+            key: username
+          password:
+            name: vmpromsecret
+            key: password
+grafana:
+  enabled: false
+alertmanager:
+  enabled: false
+defaultRules:
+  create: true
+  rules:
+    alertmanager: true
+    etcd: true
+    configReloaders: true
+    general: true
+    k8s: true
+    kubeApiserver: true
+    kubeApiserverAvailability: true
+    kubeApiserverSlos: true
+    kubelet: true
+    kubeProxy: true
+    kubePrometheusGeneral: true
+    kubePrometheusNodeRecording: true
+    kubernetesApps: true
+    kubernetesResources: true
+    kubernetesStorage: true
+    kubernetesSystem: true
+    kubeScheduler: true
+    kubeStateMetrics: true
+    network: true
+    node: true
+    nodeExporterAlerting: true
+    nodeExporterRecording: true
+    prometheus: true
+    prometheusOperator: true
+prometheusOperator:
+  prometheusConfigReloader:
+    resources:
+      requests:
+        cpu: 80m
+        memory: 50Mi
+      limits:
+        cpu: 200m
+        memory: 100Mi

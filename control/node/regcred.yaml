@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJyZWdpc3RyeS5naXRsYWIuY29tIjp7InVzZXJuYW1lIjoidXRrYXJzaGthbndhdCIsInBhc3N3b3JkIjoiZ2xwYXQtMld4eXhDUlBaRTVXRXYtel9MWVgiLCJhdXRoIjoiZFhScllYSnphR3RoYm5kaGREcG5iSEJoZEMweVYzaDVlRU5TVUZwRk5WZEZkaTE2WDB4WldBPT0ifX19
+kind: Secret
+metadata:
+  name: regcred
+  namespace: node
+type: kubernetes.io/dockerconfigjson
