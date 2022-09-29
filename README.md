@@ -1,6 +1,4 @@
-# Steps To Deploy Platform
-
-
+# Useful commands for deploying platform
 
 
 
@@ -33,8 +31,8 @@ helm repo update
 helm install ingress-nginx ingress-nginx/ingress-nginx
 ```
 #### Install ingress
-> **_NOTE:_**  Configure location in ingress.yaml.
-More info at https://kubernetes.io/docs/concepts/services-networking/ingress/#tls
+important - Configure location in ingress.yaml.
+Can read more info at https://kubernetes.io/docs/concepts/services-networking/ingress/#tls
 ```sh
 kc apply -f ingress.yaml
 ```
@@ -52,4 +50,4 @@ helm install cert-manager jetstack/cert-manager --namespace cert-manager --creat
 kc create -f letsencrypt-production.yaml
 ```
 apply ingress.yaml and restart ingress pod
-> **_NOTE:_**  Some times challenges are not created. use "kubectl rollout restart deployment -n cert-manager cert-manager".
+Important -  Some times challenges are not created. use "kubectl rollout restart deployment -n cert-manager cert-manager".
